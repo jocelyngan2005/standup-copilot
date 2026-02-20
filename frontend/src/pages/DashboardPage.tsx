@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Video, Plus, TrendingUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Video, Plus, TrendingUp, Clock, Zap, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUpcomingStandups, getActiveStandups, getDashboardStats } from '../api/client';
 import type { UpcomingStandup, ActiveStandup, DashboardStats } from '../types';
 import LoadingSpinner from '../components/Common/LoadingSpinner';
 
 export default function DashboardPage() {
+    const navigate = useNavigate();
     const [upcoming, setUpcoming] = useState<UpcomingStandup[]>([]);
     const [active, setActive] = useState<ActiveStandup[]>([]);
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [loading, setLoading] = useState(true);
+    const [startingId, setStartingId] = useState<number | null>(null);
 
     useEffect(() => {
         Promise.all([
@@ -56,7 +58,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Stats Cards */}
-                <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
                         <div className="text-4xl font-bold mb-1">{stats?.total_standups || 0}</div>
                         <div className="text-white/80 text-sm">Total Standups</div>
@@ -64,6 +66,14 @@ export default function DashboardPage() {
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
                         <div className="text-4xl font-bold mb-1">{active.length}</div>
                         <div className="text-white/80 text-sm">Active Now</div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                        <div className="text-4xl font-bold mb-1">{stats?.total_issues_discussed || 0}</div>
+                        <div className="text-white/80 text-sm">Tasks Reviewed</div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                        <div className="text-4xl font-bold mb-1">{stats?.average_duration_minutes || 0}m</div>
+                        <div className="text-white/80 text-sm">Avg Duration</div>
                     </div>
                 </div>
             </div>
@@ -101,7 +111,7 @@ export default function DashboardPage() {
                                         to={`/meeting/${standup.id}`}
                                         className="px-6 py-2.5 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors font-medium"
                                     >
-                                        Join Now
+                                        Rejoin
                                     </Link>
                                 </div>
                             </div>
@@ -147,8 +157,22 @@ export default function DashboardPage() {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="text-sm text-gray-500">
-                                        {standup.member_count} members
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-sm text-gray-500">{standup.member_count} members</span>
+                                        <button
+                                            onClick={() => {
+                                                setStartingId(standup.id);
+                                                setTimeout(() => navigate('/meeting/42'), 800);
+                                            }}
+                                            disabled={startingId === standup.id}
+                                            className="px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors text-sm font-medium disabled:opacity-60 flex items-center gap-2"
+                                        >
+                                            {startingId === standup.id ? (
+                                                <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Starting…</>
+                                            ) : (
+                                                <><Zap className="w-4 h-4" /> Start Now</>
+                                            )}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

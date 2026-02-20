@@ -32,12 +32,12 @@ export default function HistoryPage() {
             {/* Header */}
             <div className="flex items-start justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Standup History</h1>
-                    <p className="text-white/60">
-                        View and analyze past standup meetings
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Standup History</h1>
+                    <p className="text-gray-500">
+                        View and analyse past standup meetings
                     </p>
                 </div>
-                <button className="btn-secondary flex items-center gap-2">
+                <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 flex items-center gap-2 transition-colors">
                     <Download className="w-4 h-4" />
                     Export
                 </button>
@@ -46,27 +46,27 @@ export default function HistoryPage() {
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-white">{history.length}</p>
-                    <p className="text-sm text-white/50">Total Standups</p>
+                    <p className="text-3xl font-bold text-gray-900">{history.length}</p>
+                    <p className="text-sm text-gray-500">Total Standups</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-blue-400">{totalIssues}</p>
-                    <p className="text-sm text-white/50">Issues Discussed</p>
+                    <p className="text-3xl font-bold text-blue-600">{totalIssues}</p>
+                    <p className="text-sm text-gray-500">Issues Discussed</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-red-400">{totalBlocked}</p>
-                    <p className="text-sm text-white/50">Blocked Issues</p>
+                    <p className="text-3xl font-bold text-red-600">{totalBlocked}</p>
+                    <p className="text-sm text-gray-500">Blocked Issues</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-yellow-400">{totalEscalations}</p>
-                    <p className="text-sm text-white/50">Escalations</p>
+                    <p className="text-3xl font-bold text-yellow-600">{totalEscalations}</p>
+                    <p className="text-sm text-gray-500">Escalations</p>
                 </div>
             </div>
 
             {/* Filters */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                         type="text"
                         placeholder="Search by team name..."
@@ -80,10 +80,11 @@ export default function HistoryPage() {
                         <button
                             key={days}
                             onClick={() => setDateFilter(days)}
-                            className={`px-4 py-2 rounded-xl font-medium transition-all ${dateFilter === days
-                                    ? 'bg-primary-500/20 text-primary-400 border border-primary-500/30'
-                                    : 'bg-white/5 text-white/60 border border-white/10 hover:bg-white/10'
-                                }`}
+                            className={`px-4 py-2 rounded-xl font-medium transition-all ${
+                                dateFilter === days
+                                    ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                                    : 'bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100'
+                            }`}
                         >
                             <Calendar className="w-4 h-4 inline mr-1" />
                             {days}d

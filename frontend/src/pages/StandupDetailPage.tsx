@@ -52,8 +52,8 @@ export default function StandupDetailPage() {
     if (!standup) {
         return (
             <div className="text-center py-16">
-                <p className="text-white/60">Standup not found</p>
-                <Link to="/history" className="text-primary-400 hover:text-primary-300 mt-4 inline-block">
+                <p className="text-gray-500">Standup not found</p>
+                <Link to="/history" className="text-indigo-600 hover:text-indigo-700 mt-4 inline-block">
                     ← Back to History
                 </Link>
             </div>
@@ -62,31 +62,21 @@ export default function StandupDetailPage() {
 
     const getStatusIcon = (status: string) => {
         switch (status) {
-            case 'progressing':
-                return <TrendingUp className="w-4 h-4 text-green-400" />;
-            case 'blocked':
-                return <XCircle className="w-4 h-4 text-red-400" />;
-            case 'completed':
-                return <CheckCircle className="w-4 h-4 text-blue-400" />;
-            case 'at_risk':
-                return <AlertTriangle className="w-4 h-4 text-yellow-400" />;
-            default:
-                return null;
+            case 'progressing': return <TrendingUp className="w-4 h-4 text-green-600" />;
+            case 'blocked': return <XCircle className="w-4 h-4 text-red-600" />;
+            case 'completed': return <CheckCircle className="w-4 h-4 text-blue-600" />;
+            case 'at_risk': return <AlertTriangle className="w-4 h-4 text-yellow-600" />;
+            default: return null;
         }
     };
 
     const getStatusClass = (status: string) => {
         switch (status) {
-            case 'progressing':
-                return 'bg-green-500/20 text-green-400 border-green-500/30';
-            case 'blocked':
-                return 'bg-red-500/20 text-red-400 border-red-500/30';
-            case 'completed':
-                return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
-            case 'at_risk':
-                return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-            default:
-                return 'bg-white/10 text-white/60';
+            case 'progressing': return 'bg-green-100 text-green-700 border-green-200';
+            case 'blocked': return 'bg-red-100 text-red-700 border-red-200';
+            case 'completed': return 'bg-blue-100 text-blue-700 border-blue-200';
+            case 'at_risk': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+            default: return 'bg-gray-100 text-gray-500 border-gray-200';
         }
     };
 
@@ -96,7 +86,7 @@ export default function StandupDetailPage() {
             <div className="mb-8">
                 <Link
                     to="/history"
-                    className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-4"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 mb-4"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to History
@@ -104,10 +94,10 @@ export default function StandupDetailPage() {
 
                 <div className="flex items-start justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-white mb-2">
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">
                             {standup.config?.team_name || 'Standup'} Details
                         </h1>
-                        <div className="flex items-center gap-4 text-white/60">
+                        <div className="flex items-center gap-4 text-gray-500">
                             <div className="flex items-center gap-1.5">
                                 <Clock className="w-4 h-4" />
                                 {standup.started_at
@@ -118,12 +108,13 @@ export default function StandupDetailPage() {
                                 <span>• {standup.duration_minutes} minutes</span>
                             )}
                             <span
-                                className={`px-2 py-1 text-xs font-medium rounded-full ${standup.status === 'completed'
-                                        ? 'bg-green-500/20 text-green-400'
-                                        : standup.status === 'in_progress'
-                                            ? 'bg-blue-500/20 text-blue-400'
-                                            : 'bg-white/10 text-white/60'
-                                    }`}
+                                className={`px-2 py-1 text-xs font-medium rounded-full ${
+                                standup.status === 'completed'
+                                    ? 'bg-green-100 text-green-700'
+                                    : standup.status === 'in_progress'
+                                    ? 'bg-blue-100 text-blue-700'
+                                    : 'bg-gray-100 text-gray-500'
+                            }`}
                             >
                                 {standup.status}
                             </span>
@@ -148,26 +139,26 @@ export default function StandupDetailPage() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-white">{standup.total_issues}</p>
-                    <p className="text-sm text-white/50">Total Issues</p>
+                    <p className="text-3xl font-bold text-gray-900">{standup.total_issues}</p>
+                    <p className="text-sm text-gray-500">Total Tasks</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-green-400">
+                    <p className="text-3xl font-bold text-green-600">
                         {updates.filter((u) => u.status === 'progressing').length}
                     </p>
-                    <p className="text-sm text-white/50">Progressing</p>
+                    <p className="text-sm text-gray-500">Progressing</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-red-400">
+                    <p className="text-3xl font-bold text-red-600">
                         {updates.filter((u) => u.status === 'blocked').length}
                     </p>
-                    <p className="text-sm text-white/50">Blocked</p>
+                    <p className="text-sm text-gray-500">Blocked</p>
                 </div>
                 <div className="card text-center">
-                    <p className="text-3xl font-bold text-yellow-400">
+                    <p className="text-3xl font-bold text-yellow-600">
                         {updates.filter((u) => u.escalation_needed).length}
                     </p>
-                    <p className="text-sm text-white/50">Escalations</p>
+                    <p className="text-sm text-gray-500">Escalations</p>
                 </div>
             </div>
 
@@ -175,21 +166,23 @@ export default function StandupDetailPage() {
             <div className="flex gap-2 mb-6">
                 <button
                     onClick={() => setActiveTab('issues')}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'issues'
-                            ? 'bg-primary-500/20 text-primary-400 border border-primary-500/30'
-                            : 'text-white/60 hover:text-white hover:bg-white/5'
-                        }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                        activeTab === 'issues'
+                            ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                    }`}
                 >
                     Issue Updates ({updates.length})
                 </button>
                 <button
                     onClick={() => setActiveTab('summary')}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === 'summary'
-                            ? 'bg-primary-500/20 text-primary-400 border border-primary-500/30'
-                            : 'text-white/60 hover:text-white hover:bg-white/5'
-                        }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                        activeTab === 'summary'
+                            ? 'bg-indigo-50 text-indigo-600 border border-indigo-200'
+                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                    }`}
                 >
-                    PM Summary
+                    Supervisor Summary
                 </button>
             </div>
 
@@ -201,7 +194,7 @@ export default function StandupDetailPage() {
                             <div className="flex items-start justify-between mb-4">
                                 <div>
                                     <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-sm font-mono text-primary-400">
+                                        <span className="text-sm font-mono text-indigo-600">
                                             {update.linear_issue_id}
                                         </span>
                                         <span
@@ -215,15 +208,15 @@ export default function StandupDetailPage() {
                                             </span>
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-semibold text-white">
+                                    <h3 className="text-lg font-semibold text-gray-900">
                                         {update.issue_title}
                                     </h3>
-                                    <p className="text-sm text-white/50">
+                                    <p className="text-sm text-gray-500">
                                         Assigned to {update.assignee_name || 'Unassigned'}
                                     </p>
                                 </div>
                                 {update.linear_comment_posted && (
-                                    <span className="flex items-center gap-1 text-xs text-green-400">
+                                    <span className="flex items-center gap-1 text-xs text-green-600">
                                         <MessageSquare className="w-3 h-3" />
                                         Posted to Linear
                                     </span>
@@ -232,40 +225,40 @@ export default function StandupDetailPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                                 {update.blockers && (
-                                    <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-                                        <p className="text-red-400 font-medium mb-1">Blockers</p>
-                                        <p className="text-white/70">{update.blockers}</p>
+                                    <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+                                        <p className="text-red-700 font-medium mb-1">Blockers</p>
+                                        <p className="text-gray-700 text-sm">{update.blockers}</p>
                                     </div>
                                 )}
                                 {update.dependencies && (
-                                    <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                                        <p className="text-yellow-400 font-medium mb-1">Dependencies</p>
-                                        <p className="text-white/70">{update.dependencies}</p>
+                                    <div className="p-3 rounded-lg bg-yellow-50 border border-yellow-200">
+                                        <p className="text-yellow-700 font-medium mb-1">Dependencies</p>
+                                        <p className="text-gray-700 text-sm">{update.dependencies}</p>
                                     </div>
                                 )}
                                 {update.next_steps && (
-                                    <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                                        <p className="text-blue-400 font-medium mb-1">Next Steps</p>
-                                        <p className="text-white/70">{update.next_steps}</p>
+                                    <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                                        <p className="text-blue-700 font-medium mb-1">Next Steps</p>
+                                        <p className="text-gray-700 text-sm">{update.next_steps}</p>
                                     </div>
                                 )}
                                 {update.eta && (
-                                    <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
-                                        <p className="text-green-400 font-medium mb-1">ETA</p>
-                                        <p className="text-white/70">{update.eta}</p>
+                                    <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                                        <p className="text-green-700 font-medium mb-1">ETA</p>
+                                        <p className="text-gray-700 text-sm">{update.eta}</p>
                                     </div>
                                 )}
                             </div>
 
                             {update.escalation_needed && (
-                                <div className="mt-4 p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
-                                    <div className="flex items-center gap-2 text-orange-400 font-medium mb-1">
+                                <div className="mt-4 p-3 rounded-lg bg-orange-50 border border-orange-200">
+                                    <div className="flex items-center gap-2 text-orange-700 font-medium mb-1">
                                         <AlertTriangle className="w-4 h-4" />
                                         Escalation Created
                                     </div>
-                                    <p className="text-white/70 text-sm">{update.escalation_reason}</p>
+                                    <p className="text-gray-700 text-sm">{update.escalation_reason}</p>
                                     {update.escalation_ticket_id && (
-                                        <p className="text-xs text-orange-400 mt-1">
+                                        <p className="text-xs text-orange-600 mt-1">
                                             Ticket: {update.escalation_ticket_id}
                                         </p>
                                     )}
@@ -279,50 +272,50 @@ export default function StandupDetailPage() {
                     {summary ? (
                         <div className="space-y-6">
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-center">
-                                    <p className="text-2xl font-bold text-green-400">
+                                <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-center">
+                                    <p className="text-2xl font-bold text-green-700">
                                         {summary.progress_issues.length}
                                     </p>
-                                    <p className="text-sm text-white/50">Progressing</p>
+                                    <p className="text-sm text-gray-500">Progressing</p>
                                 </div>
-                                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-center">
-                                    <p className="text-2xl font-bold text-red-400">
+                                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-center">
+                                    <p className="text-2xl font-bold text-red-700">
                                         {summary.blocked_issues.length}
                                     </p>
-                                    <p className="text-sm text-white/50">Blocked</p>
+                                    <p className="text-sm text-gray-500">Blocked</p>
                                 </div>
-                                <div className="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-center">
-                                    <p className="text-2xl font-bold text-yellow-400">
+                                <div className="p-4 rounded-xl bg-yellow-50 border border-yellow-200 text-center">
+                                    <p className="text-2xl font-bold text-yellow-700">
                                         {summary.at_risk_issues.length}
                                     </p>
-                                    <p className="text-sm text-white/50">At Risk</p>
+                                    <p className="text-sm text-gray-500">At Risk</p>
                                 </div>
-                                <div className="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-center">
-                                    <p className="text-2xl font-bold text-orange-400">
+                                <div className="p-4 rounded-xl bg-orange-50 border border-orange-200 text-center">
+                                    <p className="text-2xl font-bold text-orange-700">
                                         {summary.escalations_created.length}
                                     </p>
-                                    <p className="text-sm text-white/50">Escalations</p>
+                                    <p className="text-sm text-gray-500">Escalations</p>
                                 </div>
                             </div>
 
                             {summary.summary_text && (
                                 <div>
-                                    <h4 className="font-semibold text-white mb-3">Summary</h4>
-                                    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                                        <p className="text-white/80 whitespace-pre-wrap">{summary.summary_text}</p>
+                                    <h4 className="font-semibold text-gray-900 mb-3">AI Summary</h4>
+                                    <div className="p-4 rounded-xl bg-gray-50 border border-gray-200">
+                                        <p className="text-gray-700 whitespace-pre-wrap text-sm leading-relaxed">{summary.summary_text}</p>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="flex items-center gap-4 text-sm text-white/50">
+                            <div className="flex items-center gap-4 text-sm text-gray-500">
                                 {summary.slack_sent && (
-                                    <span className="flex items-center gap-1 text-green-400">
+                                    <span className="flex items-center gap-1 text-green-600">
                                         <CheckCircle className="w-4 h-4" />
-                                        Sent to Slack
+                                        Posted to Slack
                                     </span>
                                 )}
                                 {summary.email_sent && (
-                                    <span className="flex items-center gap-1 text-green-400">
+                                    <span className="flex items-center gap-1 text-green-600">
                                         <CheckCircle className="w-4 h-4" />
                                         Email Sent
                                     </span>
@@ -330,7 +323,7 @@ export default function StandupDetailPage() {
                             </div>
                         </div>
                     ) : (
-                        <div className="text-center py-8 text-white/50">
+                        <div className="text-center py-8 text-gray-500">
                             <p>No summary generated yet</p>
                         </div>
                     )}

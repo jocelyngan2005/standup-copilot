@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Bell, Search, CheckCircle, XCircle } from 'lucide-react';
-import { checkIntegrationHealth } from '../../api/client';
+import { Bell, CheckCircle } from 'lucide-react';
 
 const pageTitles: Record<string, string> = {
     '/': 'Dashboard',
@@ -13,14 +11,6 @@ const pageTitles: Record<string, string> = {
 
 export default function Navbar() {
     const location = useLocation();
-    const [health, setHealth] = useState<{ linear: boolean; slack: boolean } | null>(null);
-
-    useEffect(() => {
-        checkIntegrationHealth()
-            .then(setHealth)
-            .catch(() => setHealth({ linear: false, slack: false }));
-    }, []);
-
     const pageTitle = pageTitles[location.pathname] || 'StandupCopilot';
 
     return (
@@ -40,36 +30,15 @@ export default function Navbar() {
 
             {/* Right Section */}
             <div className="flex items-center gap-4">
-                {/* Search */}
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-64 pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
-                    />
+                {/* Integration Status Pills */}
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200">
+                    {['Linear', 'Slack', 'ElevenLabs'].map(name => (
+                        <div key={name} className="flex items-center gap-1.5">
+                            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
+                            <span className="text-xs font-medium text-gray-600">{name}</span>
+                        </div>
+                    ))}
                 </div>
-
-                {/* Integration Status */}
-                {/* <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200">
-                    <div className="flex items-center gap-1.5">
-                        {health?.linear ? (
-                            <CheckCircle className="w-4 h-4 text-green-500" />
-                        ) : (
-                            <XCircle className="w-4 h-4 text-red-500" />
-                        )}
-                        <span className="text-xs font-medium text-gray-600">Linear</span>
-                    </div>
-                    <div className="w-px h-4 bg-gray-200" />
-                    <div className="flex items-center gap-1.5">
-                        {health?.slack ? (
-                            <CheckCircle className="w-4 h-4 text-green-500" />
-                        ) : (
-                            <XCircle className="w-4 h-4 text-red-500" />
-                        )}
-                        <span className="text-xs font-medium text-gray-600">Slack</span>
-                    </div>
-                </div> */}
 
                 {/* Notifications */}
                 <button className="relative p-2 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors">

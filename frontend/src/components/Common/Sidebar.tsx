@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import {
     LayoutDashboard,
     Calendar,
+    History,
+    Settings,
     Zap,
     ChevronRight,
 } from 'lucide-react';
@@ -9,6 +11,8 @@ import {
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { name: 'Schedule Standup', href: '/config', icon: Calendar },
+    { name: 'History', href: '/history', icon: History },
+    { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export default function Sidebar() {

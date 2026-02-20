@@ -98,19 +98,19 @@ export default function SettingsPage() {
         <div className="max-w-4xl mx-auto space-y-8">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-white mb-2">Settings</h1>
-                <p className="text-white/60">
-                    Configure integrations and manage your StandupAI preferences
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
+                <p className="text-gray-500">
+                    Configure integrations and manage your StandupCopilot preferences
                 </p>
             </div>
 
             {/* Integration Status */}
             <div className="card">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold text-white">Integration Status</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">Integration Status</h2>
                     <button
                         onClick={checkHealth}
-                        className="btn-ghost flex items-center gap-2"
+                        className="px-3 py-2 rounded-xl text-sm font-medium border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-600 flex items-center gap-2 transition-colors"
                     >
                         <RefreshCw className="w-4 h-4" />
                         Refresh
@@ -121,26 +121,27 @@ export default function SettingsPage() {
                     {integrations.map((integration) => (
                         <div
                             key={integration.id}
-                            className={`p-4 rounded-xl border transition-all ${integration.connected
-                                ? 'bg-green-500/10 border-green-500/30'
-                                : 'bg-white/5 border-white/10'
+                            className={`p-4 rounded-xl border transition-all ${
+                                integration.connected
+                                    ? 'bg-green-50 border-green-200'
+                                    : 'bg-gray-50 border-gray-200'
                                 }`}
                         >
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <span className="text-2xl">{integration.icon}</span>
                                     <div>
-                                        <p className="font-semibold text-white">{integration.name}</p>
-                                        <p className="text-xs text-white/50">{integration.description}</p>
+                                        <p className="font-semibold text-gray-900">{integration.name}</p>
+                                        <p className="text-xs text-gray-500">{integration.description}</p>
                                     </div>
                                 </div>
                                 {integration.connected ? (
-                                    <div className="flex items-center gap-1 text-green-400 text-sm">
+                                    <div className="flex items-center gap-1 text-green-600 text-sm">
                                         <CheckCircle className="w-4 h-4" />
                                         Connected
                                     </div>
                                 ) : (
-                                    <div className="flex items-center gap-1 text-white/40 text-sm">
+                                    <div className="flex items-center gap-1 text-gray-400 text-sm">
                                         <XCircle className="w-4 h-4" />
                                         Not Connected
                                     </div>
@@ -157,19 +158,19 @@ export default function SettingsPage() {
                     <div className="flex items-center gap-3 mb-6">
                         <span className="text-2xl">{integration.icon}</span>
                         <div>
-                            <h2 className="text-xl font-semibold text-white">{integration.name}</h2>
-                            <p className="text-sm text-white/50">{integration.description}</p>
+                            <h2 className="text-xl font-semibold text-gray-900">{integration.name}</h2>
+                            <p className="text-sm text-gray-500">{integration.description}</p>
                         </div>
                     </div>
 
                     <div className="space-y-4">
                         {integration.fields.map((field) => (
                             <div key={field.key}>
-                                <label className="block text-sm font-medium text-white/80 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
                                     {field.label}
                                 </label>
                                 <div className="relative">
-                                    <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                                    <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                                     <input
                                         type={showKeys[field.key] ? 'text' : field.type}
                                         placeholder={`Enter ${field.label.toLowerCase()}`}
@@ -178,7 +179,7 @@ export default function SettingsPage() {
                                     {field.type === 'password' && (
                                         <button
                                             onClick={() => toggleShowKey(field.key)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
                                         >
                                             {showKeys[field.key] ? (
                                                 <EyeOff className="w-5 h-5" />
@@ -199,14 +200,14 @@ export default function SettingsPage() {
                 <div className="flex items-center gap-3 mb-6">
                     <span className="text-2xl">📧</span>
                     <div>
-                        <h2 className="text-xl font-semibold text-white">Email Settings</h2>
-                        <p className="text-sm text-white/50">Configure SMTP for PM summary emails</p>
+                        <h2 className="text-xl font-semibold text-gray-900">Email Settings</h2>
+                        <p className="text-sm text-gray-500">Configure SMTP for supervisor summary emails</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-white/80 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                             SMTP Host
                         </label>
                         <input
@@ -216,7 +217,7 @@ export default function SettingsPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-white/80 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                             SMTP Port
                         </label>
                         <input
@@ -226,7 +227,7 @@ export default function SettingsPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-white/80 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                             Email Username
                         </label>
                         <input
@@ -236,7 +237,7 @@ export default function SettingsPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-white/80 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                             Email Password
                         </label>
                         <input

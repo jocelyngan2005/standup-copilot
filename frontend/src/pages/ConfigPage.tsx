@@ -84,7 +84,8 @@ export default function ConfigPage() {
                 selected_issue_ids: autoFetchIssues ? [] : selectedIssues,
             });
 
-            navigate('/dashboard');
+            // For the prototype, go straight into the meeting demo
+            navigate('/meeting/42');
         } catch (error) {
             console.error('Failed to create standup config:', error);
         } finally {
@@ -452,12 +453,12 @@ export default function ConfigPage() {
                         {submitting ? (
                             <>
                                 <Loader2 className="w-4 h-4 animate-spin" />
-                                Scheduling...
+                                Starting...
                             </>
                         ) : (
                             <>
                                 <Zap className="w-4 h-4" />
-                                Schedule Standup
+                                Start Standup
                             </>
                         )}
                     </button>
