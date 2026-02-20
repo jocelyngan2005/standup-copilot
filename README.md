@@ -1,8 +1,8 @@
-# 🎓 StandupCopilot for Student Communities
+# 🎓 ProjectPulse for Student Communities
 
 <div align="center">
 
-![StandupCopilot Banner](https://img.shields.io/badge/StandupCopilot-AI%20Student%20Check--ins-6366f1?style=for-the-badge&logo=robot&logoColor=white)
+![ProjectPulse Banner](https://img.shields.io/badge/ProjectPulse-AI%20Student%20Check--ins-6366f1?style=for-the-badge&logo=robot&logoColor=white)
 
 **AI-Powered Project Check-ins for Student Group Work**
 
@@ -25,9 +25,9 @@ Transform your group project chaos into organized progress with AI voice facilit
 
 ---
 
-## ✨ What is StandupCopilot?
+## ✨ What is ProjectPulse?
 
-StandupCopilot is an **AI-powered project check-in platform** designed for student group projects. It conducts voice-based standups using ElevenLabs AI, automatically extracts updates, syncs them to Trello/Notion/GitHub, and sends summaries to WhatsApp/Discord/Slack. **No more group project chaos, last-minute rushes, or unequal contributions!**
+ProjectPulse is an **AI-powered project check-in platform** designed for student group projects. It conducts voice-based standups using ElevenLabs AI, automatically extracts updates, syncs them to Trello/Notion/GitHub, and sends summaries to WhatsApp/Discord/Slack. **No more group project chaos, last-minute rushes, or unequal contributions!**
 
 ### 🎯 Key Highlights
 
@@ -289,7 +289,7 @@ StandupCopilot is an **AI-powered project check-in platform** designed for stude
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                StandupCopilot for Students                       │
+│                   ProjectPulse for Students                      │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐      │
@@ -329,7 +329,7 @@ Transcript Storage → LLM Processing → Task Updates → Multi-Platform Summar
 ## 📂 Project Structure
 
 ```
-standup-copilot/
+projectpulse/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py                      # FastAPI app + WebSocket
@@ -416,8 +416,8 @@ standup-copilot/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/muni-iamneo/standup-copilot.git
-cd standup-copilot
+git clone https://github.com/muni-iamneo/projectpulse.git
+cd projectpulse
 ```
 
 ### 2. Backend Setup
@@ -433,7 +433,7 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Create database
-createdb standupcopilot
+createdb projectpulse
 
 # Configure environment
 cp .env.example .env
@@ -474,11 +474,11 @@ Create `backend/.env`:
 
 ```env
 # Application
-APP_NAME=StandupCopilot for Students
+APP_NAME=ProjectPulse for Students
 DEBUG=true
 
 # Database
-DATABASE_URL=postgresql://postgres:password@localhost:5432/standupcopilot
+DATABASE_URL=postgresql://postgres:password@localhost:5432/projectpulse
 
 # Task Management Integrations
 TRELLO_API_KEY=your_trello_key
@@ -857,7 +857,7 @@ npm test
 ```bash
 # Backend
 cd backend
-docker build -t standupcopilot-backend .
+docker build -t projectpulse-backend .
 
 # Frontend
 cd frontend
@@ -915,6 +915,6 @@ Built with amazing tools for student success:
 
 *Empowering students to collaborate effectively and learn together*
 
-[Report Bug](https://github.com/muni-iamneo/standup-copilot/issues) • [Request Feature](https://github.com/muni-iamneo/standup-copilot/issues)
+[Report Bug](https://github.com/muni-iamneo/projectpulse/issues) • [Request Feature](https://github.com/muni-iamneo/projectpulse/issues)
 
 </div>
